@@ -131,6 +131,18 @@ App = {
         }
     },
 
+    // requestTask: async () => {
+    //     App.setLoading(true);
+    //     const regNo = $('#regNo').val();
+    //     const owner = $('#owner').val();
+    //     const model = $('#model').val();
+    //     const manu = $('#manu').val();
+    //     await App.todoList.createTask(regNo,owner,model,manu, { from: App.account[0] });
+    //     console.log("Request Generated")
+    //     window.location.href="index.html"
+    // },
+
+
     createTask: async () => {
         App.setLoading(true);
         const regNo = $('#regNo').val();
@@ -141,16 +153,6 @@ App = {
         window.location.href="index.html"
     },
 
-    requestTask: async () => {
-        App.setLoading(true);
-        const regNo = $('#regNo').val();
-        const owner = $('#owner').val();
-        const model = $('#model').val();
-        const manu = $('#manu').val();
-        await App.todoList.requestTask(regNo,owner,model,manu, { from: App.account[0] });
-        window.location.href="index.html"
-    },
-
 
     toggleCompleted: async (e) => {
         App.setLoading(true)
@@ -158,6 +160,16 @@ App = {
         await App.todoList.toggleCompleted(taskId, { from: App.account[0] });
         window.location.reload()
     },
+
+    // toggleStatus: async (e) => {
+    //     App.setLoading(true)
+    //     const taskId = e.target.name
+    //     const choice = $('#regNo').val();
+    //     await App.todoList.toggleCompleted(taskId,choice { from: App.account[0] });
+    //     window.location.reload()
+    // },
+
+    
       
 }
 

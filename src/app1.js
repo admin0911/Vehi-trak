@@ -1,3 +1,4 @@
+search_id = []
 App = {
     contracts: {},
     loading: false,
@@ -68,50 +69,12 @@ App = {
         $('#account').html(App.account)
 
         // Render Tasks
-        await App.renderTasks()
+        // await App.renderTasks()
 
         // Update loading state
         App.setLoading(false)
         },
 
-
-    renderTasks: async () => {
-        // load all the tasks from the blockchain
-        const taskCount = await App.todoList.taskCount();
-        const $tackTemplate = $(".taskTemplate");
-
-        // render each of the tasks
-        for (var i = 1; i <= taskCount; i++){
-            const task = await App.todoList.tasks(i);
-            const task_id = task[0].toNumber();
-            const regNo = " Registration Number: " + task[1];
-            const owner = "Owner: " + task[2];
-            const task_content = "Model: " + task[3] + " |  Manufacturer: " + task[4]
-            const task_completed = task[5]
-            // console.log("task_com",task_completed)
-
-            // Create the html for the task
-            const $newTaskTemplate = $tackTemplate.clone()
-            $newTaskTemplate.find('.regNo').html(regNo)
-            $newTaskTemplate.find('.owner').html(owner)
-            $newTaskTemplate.find('.content').html(task_content)
-            $newTaskTemplate.find('input')
-                            .prop('name', task_id)
-                            .prop('checked', task_completed)
-                            .on('click', App.toggleCompleted)
-    
-            // Put the task in the correct list
-            if (task_completed) {
-                $('#completedTaskList').append($newTaskTemplate)
-            } else {
-                $('#taskList').append($newTaskTemplate)
-            }
-    
-            // Show the task
-            $newTaskTemplate.show()
-        }
-
-    },
 
 
     setLoading: (boolean) => {
@@ -120,8 +83,8 @@ App = {
         const content = $('#content');
         const inactive = $('#completedTaskList');
         if (boolean) {
-            inactive.hide();
             loader.show();
+            inactive.hide();
             content.hide();
            
         } else {
@@ -131,25 +94,6 @@ App = {
         }
     },
 
-    createTask: async () => {
-        App.setLoading(true);
-        const regNo = $('#regNo').val();
-        const owner = $('#owner').val();
-        const model = $('#model').val();
-        const manu = $('#manu').val();
-        await App.todoList.createTask(regNo,owner,model,manu, { from: App.account[0] });
-        window.location.href="index.html"
-    },
-
-    requestTask: async () => {
-        App.setLoading(true);
-        const regNo = $('#regNo').val();
-        const owner = $('#owner').val();
-        const model = $('#model').val();
-        const manu = $('#manu').val();
-        await App.todoList.requestTask(regNo,owner,model,manu, { from: App.account[0] });
-        window.location.href="index.html"
-    },
 
 
     toggleCompleted: async (e) => {
@@ -158,7 +102,61 @@ App = {
         await App.todoList.toggleCompleted(taskId, { from: App.account[0] });
         window.location.reload()
     },
-      
+    
+    SearchrenderTasks: async () => {
+        const searchReg = $('#FindTask').val();
+        console.log(searchReg)
+        const taskCount = await App.todoList.taskCount();
+        console.log(search_id)
+
+        for (var i = 1; i <= taskCount; i++){
+            const vehi = await App.todoList.tasks(i)
+            const regNo = vehi[1];
+
+            if (regNo == searchReg || vehi[2] == searchReg) 
+            {
+                for (var j = 0; j <= search_id.length; j++){
+                    // console.log("search value = ",search_id[j],"  id = ",vehi[0].toNumber())
+                    if ( search_id[j] == vehi[0].toNumber() ){
+                        // console.log(vehi[0].toNumber(),"Already there")
+                        return
+                    }
+                }
+                console.log(vehi[0].toNumber(),"New")
+                const vehi_id = vehi[0].toNumber();
+                search_id.push(vehi_id)
+                const regNo = vehi[1];
+                const owner = "Owner: " + vehi[2];
+                const vehi_content = "Model: " + vehi[3] + " |  Manufacturer: " + vehi[4]
+                const vehi_completed = vehi[5]
+
+                // const $newTaskTemplate = $tackTemplate.clone()
+                const $newTaskTemplate = $('.taskTemplate').last().clone()
+                $newTaskTemplate.find('.regNo').html(regNo)
+                $newTaskTemplate.find('.owner').html(owner)
+                $newTaskTemplate.find('.data').html(vehi_content)
+                // $newTaskTemplate.find('input')
+                //                 .prop('name', vehi_id)
+                //                 .prop('checked', vehi_completed)
+                //                 .on('click', App.toggleCompleted)
+                // console.log("1")
+                // Put the task in the correct list
+                if (vehi_completed) {
+
+                    // App.setLoading(false)
+                    $('#completedTaskList').append($newTaskTemplate)
+                } else {
+                    // App.setLoading(false)
+                    $('#taskList').append($newTaskTemplate)
+                }
+    
+                // Show the task
+                // console.log(search_id)
+                $newTaskTemplate.show()
+                
+            }
+        }
+    }
 }
 
 $(() => {

@@ -39,4 +39,34 @@ contract('ToDoList', (accounts) => {
         assert.equal(event.completed,false)
     })
 
+    //CHeck if tasks are toggled as complete
+    it('toggles task completion', async () => {
+        const result = await this.todoList.toggleCompleted(1)
+        const task = await this.todoList.tasks(1)
+        assert.equal(task.completed,true)
+        const event = result.logs[0].args
+        assert.equal(event.id.toNumber(),1)
+        assert.equal(event.completed,true)
+    })
+
+    it('Create request', async () => {
+        const result = await this.todoList.requestTask("91169 MCT","Adharsh","R8","Audi");
+        const taskCount = await this.todoList.requestCount()
+        console.log(assert.equal(taskCount,1))
+        assert.equal(taskCount,1)
+    })
+
+    it('Check status', async () => {
+        console.log("Check Status!!")
+        const result = await this.todoList.requestTask("91169 MCT","Adharsh","R8","Audi");
+        const re = await this.todolist.statusCompleted(1,"true")
+        console.log(result,re)
+        const r = await this.todolist.requests(1)
+        assert.equal(re.status,"Verified")
+        assert.equal(re.status,"Verified")
+        console.log(assert.equal(result.status,"Verified"))
+        
+        console.log(r)
+
+    })
 })

@@ -79,7 +79,7 @@
  
     }
     #taskList .content {
-      color: #0a5d0d;
+      color: #0a5d0de;
     }
       #completedTaskList .content {
         color: rgb(149, 9, 9);
@@ -89,13 +89,12 @@
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" target="_blank">Vehi-trak</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.html" target="_blank">Vehi-trak</a>
       <ul class="navbar-nav px-2">
         <li class="nav-item text-nowrap d-none d-sm-none d-sm-block">
           <small><a class="nav-link" href="#"><span id="account"></span></a></small>
           <small><a class="nav-link" href="add_details.html"><span id="Add Data">Add New Data</span></a></small>
-          <small><a class="nav-link" href="find_task.html"><span id="Add Data">Search Vehicle</span></a></small>
-          <small><a class="nav-link" href="admin_login.html"><span id="Add Data">Admin Portal</span></a></small>
+          <small><a class="nav-link" href="index.html"><span id="home">Return to Home Page</span></a></small>
         </li>
       </ul>
     </nav>
@@ -107,42 +106,31 @@
           <div id="loader" class="text-center">
             <p class="text-center">Loading...</p>
           </div>
-          <!-- <div id="content">
-            <form onSubmit="App.createTask(); return false;">
-              <input id="regNo" type="text" class="form-control" placeholder="Enter Vehicle Registration Number..." required>
-              <br>
-              <input id="owner" type="text" class="form-control" placeholder="Enter name of current Owner" required>
-              <br>
-              <input id="model" type="text" class="form-control" placeholder="Add Vehicle Model Info..." required>
-              <br>
-              <input id="manu" type="text" class="form-control" placeholder="Add Vehicle Manufacturer Info..." required>
+          <div id="search">
+            <form onSubmit="App.SearchrenderTasks(); return false;">
+              <input id="FindTask" type="text" class="form-control" placeholder="Add Vehicle Manufacturer Info..." required>
               <input type="submit" hidden="">
-            </form> -->
+            </form>
             <div id="content">
-              <div class="column" style=" margin-right: 20px;margin-bottom: 5px; border-right:1px solid black">
                 <ul id="taskList" class="list-unstyled">
-                  <h4>Active Vehicles</h4>
+                    <h4>Active Vehicles</h4>
                     <div class="taskTemplate" class="checkbox" style="display: none">
                       <label>
-                        <input type="checkbox" />
+                        <!-- <input type="checkbox" /> -->
                         <span class="regNo"></span>
                         <br>
                         <span class="owner"></span>
                         <br>
-                        <span class="content" ></span>
+                        <span class="data" ></span>
                       </label>
                     </div>
-                  </ul>
-                  <!-- <ul id="completedTaskList" class="list-unstyled">
-                    <h4>Inactive Vehicles</h4> -->
                 </ul>
               </div>
-            </div>
-            <div class="column" style="padding-right: 10px;">
               <ul id="completedTaskList" class="list-unstyled">
                 <h4>Inactive Vehicles</h4>
               </ul>
             </div>
+        </div>
         </main>
       </div>
     </div>
@@ -156,7 +144,7 @@
         <script src="vendor/web3/dist/web3.min.js"></script>
         <!-- <script src="vendor/truffle/contract/dist/truffle-contract.min.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/@truffle/contract@4.3.5/dist/truffle-contract.js"></script>
-        <script src="app.js"></script>
+        <script src="app1.js"></script>
   </body>
   <footer>
     HOLLA
