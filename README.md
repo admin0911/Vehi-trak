@@ -2,12 +2,16 @@
 
 Vehi-trak is a dApp that runs on the ethereum blockchain that helps its users in recording, storing, retrieving, and tracking pertinent information about a specific vehicle through the recording of numerous events and transactions over a vehicle's complete lifecycle. The following project uses Solidity to create the smart contract containing the business logic, truffle framework to test and deploy the smart contract, Ganache to provide a test network and Metamask to act as the wallet connected to our test network.
 
-##Funtionality of this dApp:
+##Funtionality of this dApp
 1. Version - 1
   - List all of the details held on the blockchain
   - Add details about a new vehicle
   - Search for the details of a car with respect to registration number or name of the owner
   - Change status of the car as active or inactive
+
+## Control Flow Diagram
+![VEHI0-TRAK FLOWCHART](https://user-images.githubusercontent.com/51152622/180730537-32c4a0db-d417-4c81-bf41-61850d0f1b2f.jpg)
+
 
 ## Pre-requisites
 1. Node.js already installed [ type in ' node -v ' in a terminal to check if its already installed]
