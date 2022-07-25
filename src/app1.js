@@ -104,6 +104,7 @@ App = {
     },
     
     SearchrenderTasks: async () => {
+        // Will search for vehicle information based on owner or registration number
         const searchReg = $('#FindTask').val();
         console.log(searchReg)
         const taskCount = await App.todoList.taskCount();
@@ -135,12 +136,12 @@ App = {
                 $newTaskTemplate.find('.regNo').html(regNo)
                 $newTaskTemplate.find('.owner').html(owner)
                 $newTaskTemplate.find('.data').html(vehi_content)
-                // $newTaskTemplate.find('input')
-                //                 .prop('name', vehi_id)
-                //                 .prop('checked', vehi_completed)
-                //                 .on('click', App.toggleCompleted)
-                // console.log("1")
-                // Put the task in the correct list
+                $newTaskTemplate.find('input')
+                                .prop('name', vehi_id)
+                                .prop('checked', vehi_completed)
+                                .on('click', App.toggleCompleted)
+
+                // Put the vehicle on the correct list
                 if (vehi_completed) {
 
                     // App.setLoading(false)
@@ -150,8 +151,7 @@ App = {
                     $('#taskList').append($newTaskTemplate)
                 }
     
-                // Show the task
-                // console.log(search_id)
+                // Show the information
                 $newTaskTemplate.show()
                 
             }

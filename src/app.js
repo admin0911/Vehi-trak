@@ -67,7 +67,7 @@ App = {
         // Render Account
         $('#account').html(App.account)
 
-        // Render Tasks
+        // Render Vehicles
         await App.renderTasks()
 
         // Update loading state
@@ -76,11 +76,11 @@ App = {
 
 
     renderTasks: async () => {
-        // load all the tasks from the blockchain
+        // load all the vehicles from the blockchain
         const taskCount = await App.todoList.taskCount();
         const $tackTemplate = $(".taskTemplate");
 
-        // render each of the tasks
+        // render each of the vehicle
         for (var i = 1; i <= taskCount; i++){
             const task = await App.todoList.tasks(i);
             const task_id = task[0].toNumber();
@@ -88,9 +88,8 @@ App = {
             const owner = "Owner: " + task[2];
             const task_content = "Model: " + task[3] + " |  Manufacturer: " + task[4]
             const task_completed = task[5]
-            // console.log("task_com",task_completed)
 
-            // Create the html for the task
+            // Create the html for the vehicle
             const $newTaskTemplate = $tackTemplate.clone()
             $newTaskTemplate.find('.regNo').html(regNo)
             $newTaskTemplate.find('.owner').html(owner)
@@ -100,14 +99,14 @@ App = {
                             .prop('checked', task_completed)
                             .on('click', App.toggleCompleted)
     
-            // Put the task in the correct list
+            // Put the vehicle on the correct list
             if (task_completed) {
                 $('#completedTaskList').append($newTaskTemplate)
             } else {
                 $('#taskList').append($newTaskTemplate)
             }
     
-            // Show the task
+            // Show the information
             $newTaskTemplate.show()
         }
 
@@ -132,6 +131,8 @@ App = {
     },
 
     createTask: async () => {
+        // On clicking submit in the add_details page, this function is called
+        // It scrapes data from the input fields and creates a new entry on the blockchain based on the business logic specified in the smart contract
         App.setLoading(true);
         const regNo = $('#regNo').val();
         const owner = $('#owner').val();
@@ -142,6 +143,7 @@ App = {
     },
 
     requestTask: async () => {
+        //Testing functionality
         App.setLoading(true);
         const regNo = $('#regNo').val();
         const owner = $('#owner').val();
@@ -153,6 +155,7 @@ App = {
 
 
     toggleCompleted: async (e) => {
+        //This function will change the status of the vehicle
         App.setLoading(true)
         const taskId = e.target.name
         await App.todoList.toggleCompleted(taskId, { from: App.account[0] });

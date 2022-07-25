@@ -1,3 +1,5 @@
+//Testing functionality
+
 App = {
     contracts: {},
     loading: false,
