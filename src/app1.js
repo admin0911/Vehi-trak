@@ -108,10 +108,10 @@ App = {
     SearchrenderTasks: async () => {
         // Will search for vehicle information based on owner or registration number
         const searchReg = $('#FindTask').val();
-        console.log(searchReg)
+        // console.log(searchReg)
         var flag = 0
         const taskCount = await App.todoList.taskCount();
-        console.log(search_id)
+        // console.log(search_id)
 
         
         for (var i = 1; i <= taskCount; i++){
@@ -129,8 +129,8 @@ App = {
                     }
                 }
                 flag -=1
-                console.log(vehi[0].toNumber(),"New")
-                console.log(flag)
+                // console.log(vehi[0].toNumber(),"New")
+                // console.log(flag)
                 const vehi_id = vehi[0].toNumber();
                 search_id.push(vehi_id)
                 const regNo = vehi[1];
@@ -160,7 +160,6 @@ App = {
     
                 // Show the information
                 $newTaskTemplate.show()
-                return
             }
         }
         
