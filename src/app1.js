@@ -103,16 +103,21 @@ App = {
         window.location.reload()
     },
     
+    
+
     SearchrenderTasks: async () => {
         // Will search for vehicle information based on owner or registration number
         const searchReg = $('#FindTask').val();
         console.log(searchReg)
+        var flag = 0
         const taskCount = await App.todoList.taskCount();
         console.log(search_id)
 
+        
         for (var i = 1; i <= taskCount; i++){
             const vehi = await App.todoList.tasks(i)
             const regNo = vehi[1];
+            flag+=1
 
             if (regNo == searchReg || vehi[2] == searchReg) 
             {
@@ -123,7 +128,9 @@ App = {
                         return
                     }
                 }
+                flag -=1
                 console.log(vehi[0].toNumber(),"New")
+                console.log(flag)
                 const vehi_id = vehi[0].toNumber();
                 search_id.push(vehi_id)
                 const regNo = vehi[1];
@@ -153,9 +160,14 @@ App = {
     
                 // Show the information
                 $newTaskTemplate.show()
-                
+                return
             }
         }
+        
+        if (flag == taskCount) {
+            alert(searchReg+" not Found") //incase details are not present on the blockchain
+        }
+
     }
 }
 
